@@ -8,12 +8,18 @@ fi
 DAY=${1}
 PART=${2}
 
+SOURCE_PATH=./day-${DAY}/Part${PART}.hs
+BIN_PATH=bin/d${DAY}p${PART}
+
 CWD=$(dirname ${0})
+
+hindent ${SOURCE_PATH}
+hlint ${SOURCE_PATH}
 
 mkdir -p bin
 
 stack ghc \
     --cwd ${CWD} \
-    -- ./day-${DAY}/Part${PART}.hs \
-    -o bin/d${DAY}p${PART}
+    -- ${SOURCE_PATH} \
+    -o ${BIN_PATH}
 
