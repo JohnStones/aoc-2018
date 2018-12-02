@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ $# -ne 2 ]; then
+    echo 'Must have 2 arguments: install [DAY] [PART]'
+    exit 1
+fi
+
+DAY=${1}
+PART=${2}
+
+CWD=$(dirname ${0})
+
+mkdir -p bin
+
+stack ghc \
+    --cwd ${CWD} \
+    -- ./day-${DAY}/Part${PART}.hs \
+    -o bin/d${DAY}p${PART}
+
